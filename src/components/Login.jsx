@@ -2,34 +2,74 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 class Login extends Component {
+  state = {
+    email: "",
+    password: "",
+    message: "",
+  };
+  formSubmit = (e)=>{
+    e.preventDefault();
+    const data={
+      email:this.state.email,
+      password:this.state.password,
+    }
+
+    axios.post('http://127.0.0.1:8000/api/login', data
+    )
+    .then( (response) => {
+      console.log(response);
+    })
+    .catch( (error)=> {
+      console.log(error);
+    });
+  }
+
   render() {
     return (
-      <div className="mx-auto" style={{ width: "500px" }}>
+      <div
+        className="mx-auto bg-dark py-4 my-4 rounded-2"
+        style={{ width: "500px" }}
+      >
         <div className="">
-       
           <div className="m-4">
-            <Form>
-            <h1>Login</h1>
+            <Form onSubmit={this.formSubmit}>
+              <h1 className="text-light">Login</h1>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Label className="text-light">Email address</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  placeholder="Enter email"
+                  required
+                  onChange={(e) => this.setState({ email: e.target.value })}
+                />
                 <Form.Text className="text-muted">
                   We'll never share your email with anyone else.
                 </Form.Text>
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Label className="text-light">Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  required
+                  onChange={(e) => this.setState({ password: e.target.value })}
+                />
               </Form.Group>
 
               <Button variant="primary" type="submit">
                 Submit
               </Button>
-              <div>
-                Forget Password <NavLink to="/forget">Click Here</NavLink>
+              <div className="text-light">
+                Forget Password{" "}
+                <NavLink to="/forget" className="text-decoration-none">
+                  Click Here
+                </NavLink>
               </div>
             </Form>
           </div>

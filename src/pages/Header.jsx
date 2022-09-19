@@ -20,7 +20,6 @@ function NavComp() {
   let activeStyle = {
     color: "orange",
     textDecoration: "none",
- 
   };
   let linkStyle = {
     textDecoration: "none",
@@ -29,9 +28,9 @@ function NavComp() {
   return (
     <>
       <Router>
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" expand="md" variant="dark">
           <Container fluid>
-            <Navbar.Brand href="#">React Auth</Navbar.Brand>
+            <Navbar.Brand href="#">REACT AUTH</Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
               <Nav
@@ -39,10 +38,18 @@ function NavComp() {
                 // style={{ maxHeight: "100px" }}
                 navbarScroll
               >
-                <Nav.Link to="/" style={linkStyle}>
-                  Home
+                <Nav.Link>
+                  <NavLink className="text-light link-primary" to="/about" style={linkStyle}>
+                    About Us
+                  </NavLink>
                 </Nav.Link>
-                <Nav.Link href="#action2">Link</Nav.Link>
+                <Nav.Link>
+                  <NavLink className="text-light link-primary" to="/profile" style={linkStyle}>
+                   Profile
+                  </NavLink>
+                </Nav.Link>
+
+                {/* <Nav.Link href="#action2">Profile</Nav.Link> */}
                 {/* <NavDropdown title="Link" id="navbarScrollingDropdown">
                   <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
                   <NavDropdown.Item href="#action4">
@@ -53,22 +60,19 @@ function NavComp() {
                     Something else here
                   </NavDropdown.Item>
                 </NavDropdown> */}
-                <Nav.Link href="#" disabled>
-                  Link
-                </Nav.Link>
+               
               </Nav>
               <div className="d-flex ">
                 <NavLink
                   to="/Login"
                   style={({ isActive }) => (isActive ? activeStyle : linkStyle)}
-                  className="me-4"  
+                  className="me-4"
                 >
                   Login
                 </NavLink>
                 <NavLink
                   to="/Register"
-                  style={({ isActive }) => (isActive ? activeStyle : linkStyle)} 
-                 
+                  style={({ isActive }) => (isActive ? activeStyle : linkStyle)}
                 >
                   Register
                 </NavLink>
@@ -80,8 +84,9 @@ function NavComp() {
           <Route path="/" element={<Home />} />
           <Route path="/Register" element={<Register />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/Profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/Forget" element={<Forget />} />
+          <Route path="/home" element={<Home />} />
         </Routes>
       </Router>
     </>
