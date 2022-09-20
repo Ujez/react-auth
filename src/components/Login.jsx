@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import { NavLink } from "react-router-dom";
+import { NavLink, Navigate } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
@@ -20,7 +20,10 @@ class Login extends Component {
     axios.post('http://127.0.0.1:8000/api/login', data
     )
     .then( (response) => {
-      console.log(response);
+      localStorage.setItem('token', response.data.token);
+      this.setState({
+        loggedIn:true
+      })
     })
     .catch( (error)=> {
       console.log(error);
@@ -28,10 +31,22 @@ class Login extends Component {
   }
 
   render() {
+    let bgStyle = {
+      backgroundColor: 	"#404040",
+      width: "500px"
+    };
+   
+    //After log-in Redirect to Profile
+
+    if(this.state.loggedIn){
+      return <Navigate to={'/profile'}/>
+    }
+
     return (
       <div
-        className="mx-auto bg-dark py-4 my-4 rounded-2"
-        style={{ width: "500px" }}
+        className="mx-auto  py-4 my-4 rounded-2"
+        style={ bgStyle }
+
       >
         <div className="">
           <div className="m-4">

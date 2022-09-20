@@ -5,10 +5,17 @@ import { NavLink } from "react-router-dom";
 
 class Register extends Component {
   render() {
+    let bgStyle = {
+      backgroundColor: "#404040",
+      width: "500px"
+    };
+    
+
     return (
       <div
-        className="mx-auto bg-dark py-4 my-4 rounded-2"
-        style={{ width: "500px" }}
+        className="mx-auto py-4 my-4 rounded-2"
+        style={ bgStyle }
+        
       >
         <div className="">
           <div className="m-4">
